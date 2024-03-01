@@ -1,0 +1,1702 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "d1ed344c-44f9-49d6-9fe5-e3aceb4c910f",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "C:\\Users\\Navneet Kaur\\AppData\\Local\\Temp\\ipykernel_5264\\4080736814.py:1: DeprecationWarning: \n",
+      "Pyarrow will become a required dependency of pandas in the next major release of pandas (pandas 3.0),\n",
+      "(to allow more performant data types, such as the Arrow string type, and better interoperability with other libraries)\n",
+      "but was not found to be installed on your system.\n",
+      "If this would cause problems for you,\n",
+      "please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466\n",
+      "        \n",
+      "  import pandas as pd\n"
+     ]
+    }
+   ],
+   "source": [
+    "import pandas as pd"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "4aedaa9c-73fa-4823-a80d-4a359cb0d3fb",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import matplotlib.pyplot as plt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "101480b9-6a2f-40c8-8c8c-904d5d81100c",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "id": "9807c306-482a-4b4c-875c-50c5bc6d1f97",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      " Volume in drive C is Windows\n",
+      " Volume Serial Number is AEE6-0358\n",
+      "\n",
+      " Directory of C:\\Users\\Navneet Kaur\\OneDrive\\Desktop\\jupyter project\\dsc-phase-1-project-master\\zippedData\\DATASETS\n",
+      "\n",
+      "24-02-2024  13:05    <DIR>          .\n",
+      "24-02-2024  13:05    <DIR>          ..\n",
+      "17-02-2024  19:12    <DIR>          .ipynb_checkpoints\n",
+      "10-02-2024  13:18            53,544 bom.movie_gross.csv.gz\n",
+      "10-02-2024  13:17         3,459,897 imdb.title.basics.csv.gz\n",
+      "10-02-2024  13:17           539,530 imdb.title.ratings.csv.gz\n",
+      "24-02-2024  13:05            81,728 STUDENT.ipynb\n",
+      "               4 File(s)      4,134,699 bytes\n",
+      "               3 Dir(s)  888,744,632,320 bytes free\n"
+     ]
+    }
+   ],
+   "source": [
+    "ls"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "edddcad9-d3f2-41ec-9126-3190fe7e956a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df=pd.read_csv(\"bom.movie_gross.csv.gz\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "6271f016-8ef7-4cb8-aed4-60c0b54b791d",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "                                            title      studio  domestic_gross  \\\n",
+      "0                                     Toy Story 3          BV     415000000.0   \n",
+      "1                      Alice in Wonderland (2010)          BV     334200000.0   \n",
+      "2     Harry Potter and the Deathly Hallows Part 1          WB     296000000.0   \n",
+      "3                                       Inception          WB     292600000.0   \n",
+      "4                             Shrek Forever After        P/DW     238700000.0   \n",
+      "...                                           ...         ...             ...   \n",
+      "3382                                    The Quake       Magn.          6200.0   \n",
+      "3383                  Edward II (2018 re-release)          FM          4800.0   \n",
+      "3384                                     El Pacto        Sony          2500.0   \n",
+      "3385                                     The Swan  Synergetic          2400.0   \n",
+      "3386                            An Actor Prepares       Grav.          1700.0   \n",
+      "\n",
+      "     foreign_gross  year  \n",
+      "0        652000000  2010  \n",
+      "1        691300000  2010  \n",
+      "2        664300000  2010  \n",
+      "3        535700000  2010  \n",
+      "4        513900000  2010  \n",
+      "...            ...   ...  \n",
+      "3382           NaN  2018  \n",
+      "3383           NaN  2018  \n",
+      "3384           NaN  2018  \n",
+      "3385           NaN  2018  \n",
+      "3386           NaN  2018  \n",
+      "\n",
+      "[3387 rows x 5 columns]\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(df)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "1ed20ff0-e767-4c4f-a1f6-1169c71ab50a",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "                                            title      studio  domestic_gross  \\\n",
+      "0                                     Toy Story 3          BV     415000000.0   \n",
+      "1                      Alice in Wonderland (2010)          BV     334200000.0   \n",
+      "2     Harry Potter and the Deathly Hallows Part 1          WB     296000000.0   \n",
+      "3                                       Inception          WB     292600000.0   \n",
+      "4                             Shrek Forever After        P/DW     238700000.0   \n",
+      "...                                           ...         ...             ...   \n",
+      "3382                                    The Quake       Magn.          6200.0   \n",
+      "3383                  Edward II (2018 re-release)          FM          4800.0   \n",
+      "3384                                     El Pacto        Sony          2500.0   \n",
+      "3385                                     The Swan  Synergetic          2400.0   \n",
+      "3386                            An Actor Prepares       Grav.          1700.0   \n",
+      "\n",
+      "     foreign_gross  year  \n",
+      "0        652000000  2010  \n",
+      "1        691300000  2010  \n",
+      "2        664300000  2010  \n",
+      "3        535700000  2010  \n",
+      "4        513900000  2010  \n",
+      "...            ...   ...  \n",
+      "3382           NaN  2018  \n",
+      "3383           NaN  2018  \n",
+      "3384           NaN  2018  \n",
+      "3385           NaN  2018  \n",
+      "3386           NaN  2018  \n",
+      "\n",
+      "[3387 rows x 5 columns]\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(df)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "bd9a006d-e043-4e19-b8ab-fb83b6089dd6",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "<class 'pandas.core.frame.DataFrame'>\n",
+      "RangeIndex: 3387 entries, 0 to 3386\n",
+      "Data columns (total 5 columns):\n",
+      " #   Column          Non-Null Count  Dtype  \n",
+      "---  ------          --------------  -----  \n",
+      " 0   title           3387 non-null   object \n",
+      " 1   studio          3382 non-null   object \n",
+      " 2   domestic_gross  3359 non-null   float64\n",
+      " 3   foreign_gross   2037 non-null   object \n",
+      " 4   year            3387 non-null   int64  \n",
+      "dtypes: float64(1), int64(1), object(3)\n",
+      "memory usage: 132.4+ KB\n",
+      "None\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(df.info())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "9f406d27-340f-4ade-a71f-06d107d1e5c4",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>domestic_gross</th>\n",
+       "      <th>year</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>count</th>\n",
+       "      <td>3.359000e+03</td>\n",
+       "      <td>3387.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>mean</th>\n",
+       "      <td>2.874585e+07</td>\n",
+       "      <td>2013.958075</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>std</th>\n",
+       "      <td>6.698250e+07</td>\n",
+       "      <td>2.478141</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>min</th>\n",
+       "      <td>1.000000e+02</td>\n",
+       "      <td>2010.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>25%</th>\n",
+       "      <td>1.200000e+05</td>\n",
+       "      <td>2012.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>50%</th>\n",
+       "      <td>1.400000e+06</td>\n",
+       "      <td>2014.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>75%</th>\n",
+       "      <td>2.790000e+07</td>\n",
+       "      <td>2016.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>max</th>\n",
+       "      <td>9.367000e+08</td>\n",
+       "      <td>2018.000000</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       domestic_gross         year\n",
+       "count    3.359000e+03  3387.000000\n",
+       "mean     2.874585e+07  2013.958075\n",
+       "std      6.698250e+07     2.478141\n",
+       "min      1.000000e+02  2010.000000\n",
+       "25%      1.200000e+05  2012.000000\n",
+       "50%      1.400000e+06  2014.000000\n",
+       "75%      2.790000e+07  2016.000000\n",
+       "max      9.367000e+08  2018.000000"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.describe()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "6b0603af-04c4-4e3e-a294-dc66adc45b84",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "title                0\n",
+       "studio               5\n",
+       "domestic_gross      28\n",
+       "foreign_gross     1350\n",
+       "year                 0\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "id": "4f6a5941-f8db-4073-8588-221a4af2c191",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>title</th>\n",
+       "      <th>studio</th>\n",
+       "      <th>domestic_gross</th>\n",
+       "      <th>foreign_gross</th>\n",
+       "      <th>year</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Toy Story 3</td>\n",
+       "      <td>BV</td>\n",
+       "      <td>415000000.0</td>\n",
+       "      <td>652000000</td>\n",
+       "      <td>2010</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>Alice in Wonderland (2010)</td>\n",
+       "      <td>BV</td>\n",
+       "      <td>334200000.0</td>\n",
+       "      <td>691300000</td>\n",
+       "      <td>2010</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Harry Potter and the Deathly Hallows Part 1</td>\n",
+       "      <td>WB</td>\n",
+       "      <td>296000000.0</td>\n",
+       "      <td>664300000</td>\n",
+       "      <td>2010</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>Inception</td>\n",
+       "      <td>WB</td>\n",
+       "      <td>292600000.0</td>\n",
+       "      <td>535700000</td>\n",
+       "      <td>2010</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>Shrek Forever After</td>\n",
+       "      <td>P/DW</td>\n",
+       "      <td>238700000.0</td>\n",
+       "      <td>513900000</td>\n",
+       "      <td>2010</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>...</th>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3275</th>\n",
+       "      <td>I Still See You</td>\n",
+       "      <td>LGF</td>\n",
+       "      <td>1400.0</td>\n",
+       "      <td>1500000</td>\n",
+       "      <td>2018</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3286</th>\n",
+       "      <td>The Catcher Was a Spy</td>\n",
+       "      <td>IFC</td>\n",
+       "      <td>725000.0</td>\n",
+       "      <td>229000</td>\n",
+       "      <td>2018</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3309</th>\n",
+       "      <td>Time Freak</td>\n",
+       "      <td>Grindstone</td>\n",
+       "      <td>10000.0</td>\n",
+       "      <td>256000</td>\n",
+       "      <td>2018</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3342</th>\n",
+       "      <td>Reign of Judges: Title of Liberty - Concept Short</td>\n",
+       "      <td>Darin Southa</td>\n",
+       "      <td>93200.0</td>\n",
+       "      <td>5200</td>\n",
+       "      <td>2018</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3353</th>\n",
+       "      <td>Antonio Lopez 1970: Sex Fashion &amp; Disco</td>\n",
+       "      <td>FM</td>\n",
+       "      <td>43200.0</td>\n",
+       "      <td>30000</td>\n",
+       "      <td>2018</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>2007 rows × 5 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                                                  title        studio  \\\n",
+       "0                                           Toy Story 3            BV   \n",
+       "1                            Alice in Wonderland (2010)            BV   \n",
+       "2           Harry Potter and the Deathly Hallows Part 1            WB   \n",
+       "3                                             Inception            WB   \n",
+       "4                                   Shrek Forever After          P/DW   \n",
+       "...                                                 ...           ...   \n",
+       "3275                                    I Still See You           LGF   \n",
+       "3286                              The Catcher Was a Spy           IFC   \n",
+       "3309                                         Time Freak    Grindstone   \n",
+       "3342  Reign of Judges: Title of Liberty - Concept Short  Darin Southa   \n",
+       "3353            Antonio Lopez 1970: Sex Fashion & Disco            FM   \n",
+       "\n",
+       "      domestic_gross foreign_gross  year  \n",
+       "0        415000000.0     652000000  2010  \n",
+       "1        334200000.0     691300000  2010  \n",
+       "2        296000000.0     664300000  2010  \n",
+       "3        292600000.0     535700000  2010  \n",
+       "4        238700000.0     513900000  2010  \n",
+       "...              ...           ...   ...  \n",
+       "3275          1400.0       1500000  2018  \n",
+       "3286        725000.0        229000  2018  \n",
+       "3309         10000.0        256000  2018  \n",
+       "3342         93200.0          5200  2018  \n",
+       "3353         43200.0         30000  2018  \n",
+       "\n",
+       "[2007 rows x 5 columns]"
+      ]
+     },
+     "execution_count": 26,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.dropna(axis=0)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "7c2048f6-68bc-4a21-803d-e3a59ed1a3be",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df2=pd.read_csv(\"imdb.title.basics.csv.gz\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "789f39ac-d234-40f8-8b47-bdefda95b901",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "           tconst                                primary_title  \\\n",
+      "0       tt0063540                                    Sunghursh   \n",
+      "1       tt0066787              One Day Before the Rainy Season   \n",
+      "2       tt0069049                   The Other Side of the Wind   \n",
+      "3       tt0069204                              Sabse Bada Sukh   \n",
+      "4       tt0100275                     The Wandering Soap Opera   \n",
+      "...           ...                                          ...   \n",
+      "146139  tt9916538                          Kuambil Lagi Hatiku   \n",
+      "146140  tt9916622  Rodolpho Teóphilo - O Legado de um Pioneiro   \n",
+      "146141  tt9916706                              Dankyavar Danka   \n",
+      "146142  tt9916730                                       6 Gunn   \n",
+      "146143  tt9916754               Chico Albuquerque - Revelações   \n",
+      "\n",
+      "                                     original_title  start_year  \\\n",
+      "0                                         Sunghursh        2013   \n",
+      "1                                   Ashad Ka Ek Din        2019   \n",
+      "2                        The Other Side of the Wind        2018   \n",
+      "3                                   Sabse Bada Sukh        2018   \n",
+      "4                             La Telenovela Errante        2017   \n",
+      "...                                             ...         ...   \n",
+      "146139                          Kuambil Lagi Hatiku        2019   \n",
+      "146140  Rodolpho Teóphilo - O Legado de um Pioneiro        2015   \n",
+      "146141                              Dankyavar Danka        2013   \n",
+      "146142                                       6 Gunn        2017   \n",
+      "146143               Chico Albuquerque - Revelações        2013   \n",
+      "\n",
+      "        runtime_minutes                genres  \n",
+      "0                 175.0    Action,Crime,Drama  \n",
+      "1                 114.0       Biography,Drama  \n",
+      "2                 122.0                 Drama  \n",
+      "3                   NaN          Comedy,Drama  \n",
+      "4                  80.0  Comedy,Drama,Fantasy  \n",
+      "...                 ...                   ...  \n",
+      "146139            123.0                 Drama  \n",
+      "146140              NaN           Documentary  \n",
+      "146141              NaN                Comedy  \n",
+      "146142            116.0                   NaN  \n",
+      "146143              NaN           Documentary  \n",
+      "\n",
+      "[146144 rows x 6 columns]\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(df2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "8d0db8b7-c0c8-4f55-ac19-81fb786e3fed",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "           tconst                                primary_title  \\\n",
+      "0       tt0063540                                    Sunghursh   \n",
+      "1       tt0066787              One Day Before the Rainy Season   \n",
+      "2       tt0069049                   The Other Side of the Wind   \n",
+      "3       tt0069204                              Sabse Bada Sukh   \n",
+      "4       tt0100275                     The Wandering Soap Opera   \n",
+      "...           ...                                          ...   \n",
+      "146139  tt9916538                          Kuambil Lagi Hatiku   \n",
+      "146140  tt9916622  Rodolpho Teóphilo - O Legado de um Pioneiro   \n",
+      "146141  tt9916706                              Dankyavar Danka   \n",
+      "146142  tt9916730                                       6 Gunn   \n",
+      "146143  tt9916754               Chico Albuquerque - Revelações   \n",
+      "\n",
+      "                                     original_title  start_year  \\\n",
+      "0                                         Sunghursh        2013   \n",
+      "1                                   Ashad Ka Ek Din        2019   \n",
+      "2                        The Other Side of the Wind        2018   \n",
+      "3                                   Sabse Bada Sukh        2018   \n",
+      "4                             La Telenovela Errante        2017   \n",
+      "...                                             ...         ...   \n",
+      "146139                          Kuambil Lagi Hatiku        2019   \n",
+      "146140  Rodolpho Teóphilo - O Legado de um Pioneiro        2015   \n",
+      "146141                              Dankyavar Danka        2013   \n",
+      "146142                                       6 Gunn        2017   \n",
+      "146143               Chico Albuquerque - Revelações        2013   \n",
+      "\n",
+      "        runtime_minutes                genres  \n",
+      "0                 175.0    Action,Crime,Drama  \n",
+      "1                 114.0       Biography,Drama  \n",
+      "2                 122.0                 Drama  \n",
+      "3                   NaN          Comedy,Drama  \n",
+      "4                  80.0  Comedy,Drama,Fantasy  \n",
+      "...                 ...                   ...  \n",
+      "146139            123.0                 Drama  \n",
+      "146140              NaN           Documentary  \n",
+      "146141              NaN                Comedy  \n",
+      "146142            116.0                   NaN  \n",
+      "146143              NaN           Documentary  \n",
+      "\n",
+      "[146144 rows x 6 columns]\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(df2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "93925275-3997-43e0-9a8a-585c89393853",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "tconst                 0\n",
+       "primary_title          1\n",
+       "original_title        22\n",
+       "start_year             0\n",
+       "runtime_minutes    31739\n",
+       "genres              5408\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 13,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df2.isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "575d1a0b-a5d3-4cb5-9fd8-ce2c44f714a2",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "(3387, 5) (146144, 6)\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(df.shape, df2.shape)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a9ad5b7f-4ab7-4352-89d7-9213898c82d2",
+   "metadata": {},
+   "source": [
+    "# Data preparation"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "id": "f73fba44-23ee-4c91-8746-242617764b23",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>title</th>\n",
+       "      <th>studio</th>\n",
+       "      <th>domestic_gross</th>\n",
+       "      <th>foreign_gross</th>\n",
+       "      <th>year</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Toy Story 3</td>\n",
+       "      <td>BV</td>\n",
+       "      <td>415000000.0</td>\n",
+       "      <td>652000000</td>\n",
+       "      <td>2010</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>Alice in Wonderland (2010)</td>\n",
+       "      <td>BV</td>\n",
+       "      <td>334200000.0</td>\n",
+       "      <td>691300000</td>\n",
+       "      <td>2010</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Harry Potter and the Deathly Hallows Part 1</td>\n",
+       "      <td>WB</td>\n",
+       "      <td>296000000.0</td>\n",
+       "      <td>664300000</td>\n",
+       "      <td>2010</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>Inception</td>\n",
+       "      <td>WB</td>\n",
+       "      <td>292600000.0</td>\n",
+       "      <td>535700000</td>\n",
+       "      <td>2010</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>Shrek Forever After</td>\n",
+       "      <td>P/DW</td>\n",
+       "      <td>238700000.0</td>\n",
+       "      <td>513900000</td>\n",
+       "      <td>2010</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>...</th>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3382</th>\n",
+       "      <td>The Quake</td>\n",
+       "      <td>Magn.</td>\n",
+       "      <td>6200.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>2018</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3383</th>\n",
+       "      <td>Edward II (2018 re-release)</td>\n",
+       "      <td>FM</td>\n",
+       "      <td>4800.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>2018</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3384</th>\n",
+       "      <td>El Pacto</td>\n",
+       "      <td>Sony</td>\n",
+       "      <td>2500.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>2018</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3385</th>\n",
+       "      <td>The Swan</td>\n",
+       "      <td>Synergetic</td>\n",
+       "      <td>2400.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>2018</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3386</th>\n",
+       "      <td>An Actor Prepares</td>\n",
+       "      <td>Grav.</td>\n",
+       "      <td>1700.0</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>2018</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>3387 rows × 5 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                                            title      studio  domestic_gross  \\\n",
+       "0                                     Toy Story 3          BV     415000000.0   \n",
+       "1                      Alice in Wonderland (2010)          BV     334200000.0   \n",
+       "2     Harry Potter and the Deathly Hallows Part 1          WB     296000000.0   \n",
+       "3                                       Inception          WB     292600000.0   \n",
+       "4                             Shrek Forever After        P/DW     238700000.0   \n",
+       "...                                           ...         ...             ...   \n",
+       "3382                                    The Quake       Magn.          6200.0   \n",
+       "3383                  Edward II (2018 re-release)          FM          4800.0   \n",
+       "3384                                     El Pacto        Sony          2500.0   \n",
+       "3385                                     The Swan  Synergetic          2400.0   \n",
+       "3386                            An Actor Prepares       Grav.          1700.0   \n",
+       "\n",
+       "     foreign_gross  year  \n",
+       "0        652000000  2010  \n",
+       "1        691300000  2010  \n",
+       "2        664300000  2010  \n",
+       "3        535700000  2010  \n",
+       "4        513900000  2010  \n",
+       "...            ...   ...  \n",
+       "3382           NaN  2018  \n",
+       "3383           NaN  2018  \n",
+       "3384           NaN  2018  \n",
+       "3385           NaN  2018  \n",
+       "3386           NaN  2018  \n",
+       "\n",
+       "[3387 rows x 5 columns]"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "                                            title  year\n",
+      "0                                     Toy Story 3  2010\n",
+      "1                      Alice in Wonderland (2010)  2010\n",
+      "2     Harry Potter and the Deathly Hallows Part 1  2010\n",
+      "3                                       Inception  2010\n",
+      "4                             Shrek Forever After  2010\n",
+      "...                                           ...   ...\n",
+      "3382                                    The Quake  2018\n",
+      "3383                  Edward II (2018 re-release)  2018\n",
+      "3384                                     El Pacto  2018\n",
+      "3385                                     The Swan  2018\n",
+      "3386                            An Actor Prepares  2018\n",
+      "\n",
+      "[3387 rows x 2 columns]\n"
+     ]
+    }
+   ],
+   "source": [
+    "display(df)\n",
+    "df.drop(columns=['studio', 'domestic_gross', 'foreign_gross'], axis=1, inplace=True)\n",
+    "print(df)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c563e31e-21a0-4776-b192-75369f56f2c8",
+   "metadata": {},
+   "source": [
+    "# Merging datasets"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "id": "e023c207-52bc-4523-9dca-8921c58b95f0",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "merged=pd.merge(df2,df3, on='tconst')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "id": "ceebbac7-6c13-4b77-a698-c80e330b3b4f",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>tconst</th>\n",
+       "      <th>primary_title</th>\n",
+       "      <th>original_title</th>\n",
+       "      <th>start_year</th>\n",
+       "      <th>runtime_minutes</th>\n",
+       "      <th>genres</th>\n",
+       "      <th>averagerating</th>\n",
+       "      <th>numvotes</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>tt0063540</td>\n",
+       "      <td>Sunghursh</td>\n",
+       "      <td>Sunghursh</td>\n",
+       "      <td>2013</td>\n",
+       "      <td>175.0</td>\n",
+       "      <td>Action,Crime,Drama</td>\n",
+       "      <td>7.0</td>\n",
+       "      <td>77</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>tt0066787</td>\n",
+       "      <td>One Day Before the Rainy Season</td>\n",
+       "      <td>Ashad Ka Ek Din</td>\n",
+       "      <td>2019</td>\n",
+       "      <td>114.0</td>\n",
+       "      <td>Biography,Drama</td>\n",
+       "      <td>7.2</td>\n",
+       "      <td>43</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>tt0069049</td>\n",
+       "      <td>The Other Side of the Wind</td>\n",
+       "      <td>The Other Side of the Wind</td>\n",
+       "      <td>2018</td>\n",
+       "      <td>122.0</td>\n",
+       "      <td>Drama</td>\n",
+       "      <td>6.9</td>\n",
+       "      <td>4517</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>tt0069204</td>\n",
+       "      <td>Sabse Bada Sukh</td>\n",
+       "      <td>Sabse Bada Sukh</td>\n",
+       "      <td>2018</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>Comedy,Drama</td>\n",
+       "      <td>6.1</td>\n",
+       "      <td>13</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>tt0100275</td>\n",
+       "      <td>The Wandering Soap Opera</td>\n",
+       "      <td>La Telenovela Errante</td>\n",
+       "      <td>2017</td>\n",
+       "      <td>80.0</td>\n",
+       "      <td>Comedy,Drama,Fantasy</td>\n",
+       "      <td>6.5</td>\n",
+       "      <td>119</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      tconst                    primary_title              original_title  \\\n",
+       "0  tt0063540                        Sunghursh                   Sunghursh   \n",
+       "1  tt0066787  One Day Before the Rainy Season             Ashad Ka Ek Din   \n",
+       "2  tt0069049       The Other Side of the Wind  The Other Side of the Wind   \n",
+       "3  tt0069204                  Sabse Bada Sukh             Sabse Bada Sukh   \n",
+       "4  tt0100275         The Wandering Soap Opera       La Telenovela Errante   \n",
+       "\n",
+       "   start_year  runtime_minutes                genres  averagerating  numvotes  \n",
+       "0        2013            175.0    Action,Crime,Drama            7.0        77  \n",
+       "1        2019            114.0       Biography,Drama            7.2        43  \n",
+       "2        2018            122.0                 Drama            6.9      4517  \n",
+       "3        2018              NaN          Comedy,Drama            6.1        13  \n",
+       "4        2017             80.0  Comedy,Drama,Fantasy            6.5       119  "
+      ]
+     },
+     "execution_count": 32,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "merged.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "id": "7d3c6de3-e6ca-40b5-9d82-dbbc7e52ff63",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "merged=merged.rename(columns={'original_title':'title'})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "id": "6495d9ab-25fa-40f5-be07-4b2301e7221e",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>tconst</th>\n",
+       "      <th>primary_title</th>\n",
+       "      <th>title</th>\n",
+       "      <th>start_year</th>\n",
+       "      <th>runtime_minutes</th>\n",
+       "      <th>genres</th>\n",
+       "      <th>averagerating</th>\n",
+       "      <th>numvotes</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>tt0063540</td>\n",
+       "      <td>Sunghursh</td>\n",
+       "      <td>Sunghursh</td>\n",
+       "      <td>2013</td>\n",
+       "      <td>175.0</td>\n",
+       "      <td>Action,Crime,Drama</td>\n",
+       "      <td>7.0</td>\n",
+       "      <td>77</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>tt0066787</td>\n",
+       "      <td>One Day Before the Rainy Season</td>\n",
+       "      <td>Ashad Ka Ek Din</td>\n",
+       "      <td>2019</td>\n",
+       "      <td>114.0</td>\n",
+       "      <td>Biography,Drama</td>\n",
+       "      <td>7.2</td>\n",
+       "      <td>43</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>tt0069049</td>\n",
+       "      <td>The Other Side of the Wind</td>\n",
+       "      <td>The Other Side of the Wind</td>\n",
+       "      <td>2018</td>\n",
+       "      <td>122.0</td>\n",
+       "      <td>Drama</td>\n",
+       "      <td>6.9</td>\n",
+       "      <td>4517</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>tt0069204</td>\n",
+       "      <td>Sabse Bada Sukh</td>\n",
+       "      <td>Sabse Bada Sukh</td>\n",
+       "      <td>2018</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>Comedy,Drama</td>\n",
+       "      <td>6.1</td>\n",
+       "      <td>13</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>tt0100275</td>\n",
+       "      <td>The Wandering Soap Opera</td>\n",
+       "      <td>La Telenovela Errante</td>\n",
+       "      <td>2017</td>\n",
+       "      <td>80.0</td>\n",
+       "      <td>Comedy,Drama,Fantasy</td>\n",
+       "      <td>6.5</td>\n",
+       "      <td>119</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      tconst                    primary_title                       title  \\\n",
+       "0  tt0063540                        Sunghursh                   Sunghursh   \n",
+       "1  tt0066787  One Day Before the Rainy Season             Ashad Ka Ek Din   \n",
+       "2  tt0069049       The Other Side of the Wind  The Other Side of the Wind   \n",
+       "3  tt0069204                  Sabse Bada Sukh             Sabse Bada Sukh   \n",
+       "4  tt0100275         The Wandering Soap Opera       La Telenovela Errante   \n",
+       "\n",
+       "   start_year  runtime_minutes                genres  averagerating  numvotes  \n",
+       "0        2013            175.0    Action,Crime,Drama            7.0        77  \n",
+       "1        2019            114.0       Biography,Drama            7.2        43  \n",
+       "2        2018            122.0                 Drama            6.9      4517  \n",
+       "3        2018              NaN          Comedy,Drama            6.1        13  \n",
+       "4        2017             80.0  Comedy,Drama,Fantasy            6.5       119  "
+      ]
+     },
+     "execution_count": 35,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "merged.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "id": "965529d6-dcd2-4d66-9f64-0ee95b81cde4",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>title</th>\n",
+       "      <th>year</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Toy Story 3</td>\n",
+       "      <td>2010</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>Alice in Wonderland (2010)</td>\n",
+       "      <td>2010</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Harry Potter and the Deathly Hallows Part 1</td>\n",
+       "      <td>2010</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>Inception</td>\n",
+       "      <td>2010</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>Shrek Forever After</td>\n",
+       "      <td>2010</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                                         title  year\n",
+       "0                                  Toy Story 3  2010\n",
+       "1                   Alice in Wonderland (2010)  2010\n",
+       "2  Harry Potter and the Deathly Hallows Part 1  2010\n",
+       "3                                    Inception  2010\n",
+       "4                          Shrek Forever After  2010"
+      ]
+     },
+     "execution_count": 33,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "id": "2221e136-1127-48b3-9cdb-3ecb04b7c470",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "MERGED_DATA=pd.merge(df,merged, on='title')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 42,
+   "id": "d168ff47-c621-4aa7-bc9c-04cd30a1e7d3",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>title</th>\n",
+       "      <th>year</th>\n",
+       "      <th>tconst</th>\n",
+       "      <th>primary_title</th>\n",
+       "      <th>start_year</th>\n",
+       "      <th>runtime_minutes</th>\n",
+       "      <th>genres</th>\n",
+       "      <th>averagerating</th>\n",
+       "      <th>numvotes</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Toy Story 3</td>\n",
+       "      <td>2010</td>\n",
+       "      <td>tt0435761</td>\n",
+       "      <td>Toy Story 3</td>\n",
+       "      <td>2010</td>\n",
+       "      <td>103.0</td>\n",
+       "      <td>Adventure,Animation,Comedy</td>\n",
+       "      <td>8.3</td>\n",
+       "      <td>682218</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>Inception</td>\n",
+       "      <td>2010</td>\n",
+       "      <td>tt1375666</td>\n",
+       "      <td>Inception</td>\n",
+       "      <td>2010</td>\n",
+       "      <td>148.0</td>\n",
+       "      <td>Action,Adventure,Sci-Fi</td>\n",
+       "      <td>8.8</td>\n",
+       "      <td>1841066</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Shrek Forever After</td>\n",
+       "      <td>2010</td>\n",
+       "      <td>tt0892791</td>\n",
+       "      <td>Shrek Forever After</td>\n",
+       "      <td>2010</td>\n",
+       "      <td>93.0</td>\n",
+       "      <td>Adventure,Animation,Comedy</td>\n",
+       "      <td>6.3</td>\n",
+       "      <td>167532</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>The Twilight Saga: Eclipse</td>\n",
+       "      <td>2010</td>\n",
+       "      <td>tt1325004</td>\n",
+       "      <td>The Twilight Saga: Eclipse</td>\n",
+       "      <td>2010</td>\n",
+       "      <td>124.0</td>\n",
+       "      <td>Adventure,Drama,Fantasy</td>\n",
+       "      <td>5.0</td>\n",
+       "      <td>211733</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>Iron Man 2</td>\n",
+       "      <td>2010</td>\n",
+       "      <td>tt1228705</td>\n",
+       "      <td>Iron Man 2</td>\n",
+       "      <td>2010</td>\n",
+       "      <td>124.0</td>\n",
+       "      <td>Action,Adventure,Sci-Fi</td>\n",
+       "      <td>7.0</td>\n",
+       "      <td>657690</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                        title  year     tconst               primary_title  \\\n",
+       "0                 Toy Story 3  2010  tt0435761                 Toy Story 3   \n",
+       "1                   Inception  2010  tt1375666                   Inception   \n",
+       "2         Shrek Forever After  2010  tt0892791         Shrek Forever After   \n",
+       "3  The Twilight Saga: Eclipse  2010  tt1325004  The Twilight Saga: Eclipse   \n",
+       "4                  Iron Man 2  2010  tt1228705                  Iron Man 2   \n",
+       "\n",
+       "   start_year  runtime_minutes                      genres  averagerating  \\\n",
+       "0        2010            103.0  Adventure,Animation,Comedy            8.3   \n",
+       "1        2010            148.0     Action,Adventure,Sci-Fi            8.8   \n",
+       "2        2010             93.0  Adventure,Animation,Comedy            6.3   \n",
+       "3        2010            124.0     Adventure,Drama,Fantasy            5.0   \n",
+       "4        2010            124.0     Action,Adventure,Sci-Fi            7.0   \n",
+       "\n",
+       "   numvotes  \n",
+       "0    682218  \n",
+       "1   1841066  \n",
+       "2    167532  \n",
+       "3    211733  \n",
+       "4    657690  "
+      ]
+     },
+     "execution_count": 42,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "MERGED_DATA.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "0288db73-4c63-412e-bf92-de5f664aeea8",
+   "metadata": {},
+   "source": [
+    "# Data Analysis"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "1233ffcc-ac7a-4fe4-a59a-2aa89fe9a555",
+   "metadata": {},
+   "source": [
+    "# Number of movies per year"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 40,
+   "id": "e8669a2f-d842-4df4-bcaf-ee7bef7a2f19",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "year\n",
+       "2015    346\n",
+       "2016    309\n",
+       "2011    292\n",
+       "2012    289\n",
+       "2014    274\n",
+       "2017    254\n",
+       "2013    248\n",
+       "2010    220\n",
+       "2018    215\n",
+       "Name: count, dtype: int64"
+      ]
+     },
+     "execution_count": 40,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "MERGED_DATA['year'].value_counts()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "4f42c90d-366d-44ea-9802-dc00b9529e81",
+   "metadata": {},
+   "source": [
+    "# Top 10 Title of the movies"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 43,
+   "id": "cf7d3ab9-6b98-4545-b99c-e95690962a0b",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "                                             year\n",
+      "title                                            \n",
+      "Avengers: Infinity War                       2018\n",
+      "Black Panther                                2018\n",
+      "Jurassic World: Fallen Kingdom               2018\n",
+      "Incredibles 2                                2018\n",
+      "Aquaman                                      2018\n",
+      "Bohemian Rhapsody                            2018\n",
+      "Mission: Impossible - Fallout                2018\n",
+      "Deadpool 2                                   2018\n",
+      "Fantastic Beasts: The Crimes of Grindelwald  2018\n",
+      "Ant-Man and the Wasp                         2018\n"
+     ]
+    }
+   ],
+   "source": [
+    "top10=MERGED_DATA.nlargest(10,'year')[['title', 'year']]\\\n",
+    ".set_index('title')\n",
+    "print(top10)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "2152018a-12d5-4572-bd5b-b001d0659aea",
+   "metadata": {},
+   "source": [
+    "# top10 lengthy movies and runtime"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 44,
+   "id": "7eafc54a-48d4-4d7a-b2b4-b8c316ad7631",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "                              runtime_minutes\n",
+      "title                                        \n",
+      "Bhaag Milkha Bhaag                      186.0\n",
+      "M.S. Dhoni: The Untold Story            184.0\n",
+      "Aurora                                  181.0\n",
+      "The Wolf of Wall Street                 180.0\n",
+      "Jab Tak Hai Jaan                        176.0\n",
+      "Agneepath                               174.0\n",
+      "Cloud Atlas                             172.0\n",
+      "Dil Dhadakne Do                         170.0\n",
+      "Sultan                                  170.0\n",
+      "The Tempest                             169.0\n"
+     ]
+    }
+   ],
+   "source": [
+    "top10_len=MERGED_DATA.nlargest(10,'runtime_minutes')[['title','runtime_minutes']].set_index('title')\n",
+    "print(top10_len)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "94c647d0-8ff5-45d7-8b3a-cdc547e34247",
+   "metadata": {},
+   "source": [
+    "# Averagerating of each movie"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 45,
+   "id": "ace43f2b-49e5-4f3d-9282-fc042c6e4827",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "title\n",
+       "'71                         7.2\n",
+       "10 Cloverfield Lane         7.2\n",
+       "10 Years                    6.1\n",
+       "102 Not Out                 7.5\n",
+       "11-11-11                    4.0\n",
+       "                           ... \n",
+       "Zindagi Na Milegi Dobara    8.1\n",
+       "Zombeavers                  4.8\n",
+       "Zookeeper                   5.2\n",
+       "Zoolander 2                 4.7\n",
+       "Zootopia                    8.0\n",
+       "Name: averagerating, Length: 2136, dtype: float64"
+      ]
+     },
+     "execution_count": 45,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "MERGED_DATA.groupby('title')['averagerating'].mean()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f28ed7e1-a6bb-4b44-808a-0638d00037ec",
+   "metadata": {},
+   "source": [
+    "# Total number of rating for a movie"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 46,
+   "id": "f3a0552e-feda-4fce-8fa0-c4ee9d20aeba",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "title\n",
+       "Split                  6\n",
+       "Eden                   6\n",
+       "Aurora                 6\n",
+       "Truth                  5\n",
+       "The Journey            5\n",
+       "                      ..\n",
+       "I Am Number Four       1\n",
+       "I Am Not a Witch       1\n",
+       "I Am Eleven            1\n",
+       "Hyde Park on Hudson    1\n",
+       "Zootopia               1\n",
+       "Name: averagerating, Length: 2136, dtype: int64"
+      ]
+     },
+     "execution_count": 46,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "MERGED_DATA.groupby('title')['averagerating'].count().sort_values(ascending=False)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "3f507a22-849e-4602-ac55-1e68f92b8083",
+   "metadata": {},
+   "source": [
+    "# top 5 genres and numvotes"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 47,
+   "id": "82587a33-4440-495a-a5e0-653032c33ed4",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "                         numvotes\n",
+      "genres                           \n",
+      "Action,Adventure,Sci-Fi   1841066\n",
+      "Action,Thriller           1387769\n",
+      "Adventure,Drama,Sci-Fi    1299334\n",
+      "Drama,Western             1211405\n",
+      "Biography,Crime,Drama     1035358\n"
+     ]
+    }
+   ],
+   "source": [
+    "top5=MERGED_DATA.nlargest(5,'numvotes')[['genres', 'numvotes']]\\\n",
+    ".set_index('genres')\n",
+    "print(top5)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8caf72d8-fc00-4f4a-8050-c1bd18472562",
+   "metadata": {},
+   "source": [
+    "# Highest average numvotes"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 48,
+   "id": "65fc9959-300e-4388-a592-3fb8aa6c54be",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "year\n",
+       "2010    100630.154545\n",
+       "2013     96368.125000\n",
+       "2012     86913.290657\n",
+       "2014     83993.715328\n",
+       "2011     79060.876712\n",
+       "2016     57280.223301\n",
+       "2015     56661.488439\n",
+       "2017     54453.866142\n",
+       "2018     44555.581395\n",
+       "Name: numvotes, dtype: float64"
+      ]
+     },
+     "execution_count": 48,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "MERGED_DATA.groupby('year')['numvotes'].mean().sort_values(ascending=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 50,
+   "id": "8fe816fe-a999-4f71-93e9-5f25d9f7105b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import matplotlib.pyplot as plt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 52,
+   "id": "920a655a-7064-4c92-9c49-a2f6bfee5bf1",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/png": "iVBORw0KGgoAAAANSUhEUgAAAkAAAAHHCAYAAABXx+fLAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjguMiwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8g+/7EAAAACXBIWXMAAA9hAAAPYQGoP6dpAABBfUlEQVR4nO3deVxU9f7H8fcAMogJaiqgoUimpim4pFEZLhiamlqa2SLiUteyjcqie92yIk3N6nKzckHLcmmxUi9qKPqrSHOhstKkcAdcEcEEhfP7o4fnOoEbDgx4Xs/H4zzqfM/3fOfz5Uzx5iwzNsMwDAEAAFiIm6sLAAAAKG8EIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIKAcBAUFaciQIaXet1evXs4tCAAsjgAEXKKEhATZbDZt3LixxO2dOnXSDTfcUM5VOdcvv/yi8ePHa+fOnZe87+jRo2Wz2TRw4EDnF1bJ2Ww22Ww2TZ06tdi2C72vKpv//Oc/SkhIcHUZwDkRgIBysH37dr333nuuLuOi/fLLL5owYcIlByDDMPTRRx8pKChIX375pY4fP142BVZyr732mk6cOOHqMsoUAQgVHQEIKAd2u11VqlRxdRllLjk5WXv37tXs2bN1+vRpffrpp+Vew+nTp1VQUFDur3uxQkNDlZWVpRkzZri6FMDSCEBAOSjpHqAff/xR4eHhqlq1qq655hq99NJLmjNnjmw2W4lnXr7++mu1b99eXl5eCg4O1rx584r1yc7O1pNPPqnAwEDZ7XY1btxYkyZNUlFRkUO/BQsWqG3btqpevbp8fHzUsmVLvfHGG5L+uhQzYMAASVLnzp3NyzbJyckXnOf8+fPVvHlzde7cWREREZo/f765LSsrSx4eHpowYUKx/bZv3y6bzaZ///vflzSXnTt3ymazacqUKZo+fbquvfZa2e12/fLLLyooKNDYsWPVtm1b+fr6qlq1aurYsaPWrFlT7PUPHz6sBx98UD4+PqpRo4aioqL0ww8/yGazFTuLsW3bNvXv31+1atWSl5eX2rVrpy+++OKCP5szbrnlFnXp0kWTJ0/Wn3/+ed6+nTp1UqdOnYq1DxkyREFBQSX+HOLj4xUcHCxvb2/dfvvt2rNnjwzD0MSJE3XNNdeoatWq6tOnj44cOWLu36tXLwUHB5dYQ1hYmNq1a2eunz59WhMnTjR/1kFBQXrhhReUn59v9gkKCtLPP/+stWvXmu+fs+fhjPcpcLk8XF0AUFkdO3ZMhw4dKtZ+6tSpC+67b98+M1zExsaqWrVqmjlzpux2e4n909LS1L9/fw0bNkxRUVGaPXu2hgwZorZt26pFixaSpBMnTig8PFz79u3Tww8/rAYNGujbb79VbGysMjIyNH36dEnSqlWrNGjQIHXt2lWTJk2SJP3666/65ptv9MQTT+i2227T448/rjfffFMvvPCCrr/+ekky/3ku+fn5+uSTT/T0009LkgYNGqTo6GhlZmbK399ffn5+Cg8P16JFizRu3DiHfRcuXCh3d3czeF3sXM6YM2eOTp48qYceekh2u121atVSTk6OZs6cqUGDBmnEiBE6fvy4Zs2apcjISG3YsEGhoaGSpKKiIvXu3VsbNmzQyJEj1axZM33++eeKiooqNseff/5Zt9xyi+rXr6/nn39e1apV06JFi9S3b1998skn6tev33l/RmeMHz9et912m95++23FxMRc1D4XY/78+SooKNBjjz2mI0eOaPLkybrnnnvUpUsXJScn67nnnlNaWpreeustPfPMM5o9e7YkaeDAgRo8eLC+//573XjjjeZ4u3bt0nfffafXXnvNbBs+fLjmzp2r/v376+mnn9b69esVFxenX3/9VZ999pkkafr06Xrsscd01VVX6Z///Kckyc/PT5Lz3qfAZTMAXJI5c+YYks67tGjRwmGfhg0bGlFRUeb6Y489ZthsNmPLli1m2+HDh41atWoZkoz09HSHfSUZ69atM9sOHDhg2O124+mnnzbbJk6caFSrVs347bffHF77+eefN9zd3Y3du3cbhmEYTzzxhOHj42OcPn36nHNcvHixIclYs2bNRf9cPv74Y0OSsWPHDsMwDCMnJ8fw8vIyXn/9dbPPO++8Y0gyfvrpJ4d9mzdvbnTp0uWS55Kenm5IMnx8fIwDBw449D19+rSRn5/v0Hb06FHDz8/PGDp0qNn2ySefGJKM6dOnm22FhYVGly5dDEnGnDlzzPauXbsaLVu2NE6ePGm2FRUVGTfffLNx3XXXXfBnJMl49NFHDcMwjM6dOxv+/v7GiRMnDMP43/vq+++/N/uHh4cb4eHhxcaJiooyGjZsaK6f+TnUqVPHyM7ONttjY2MNSUZISIhx6tQps33QoEGGp6enOY9jx44Vez8ZhmFMnjzZsNlsxq5duwzDMIzU1FRDkjF8+HCHfs8884whyVi9erXZ1qJFixJrd+b7FLgcXAIDSik+Pl6rVq0qtrRq1eqC+yYmJiosLMw8CyFJtWrV0v33319i/+bNm6tjx47mep06ddS0aVP98ccfZtvixYvVsWNH1axZU4cOHTKXiIgIFRYWat26dZKkGjVqKC8vT6tWrSrlzEs2f/58tWvXTo0bN5YkVa9eXT179nS4DHbXXXfJw8NDCxcuNNu2bt2qX375xeGpsYudyxl333236tSp49Dm7u4uT09PSX+d5Tly5IhOnz6tdu3aafPmzWa/xMREValSRSNGjDDb3Nzc9OijjzqMd+TIEa1evVr33HOPjh8/btZ0+PBhRUZGaseOHdq3b99F/7zGjx+vzMxMp94LNGDAAPn6+prrHTp0kCQ98MAD8vDwcGgvKCgw6/Xx8VGPHj20aNEiGYZh9lu4cKFuuukmNWjQQJK0fPlySSp21urMWb9ly5ZdsEZXv0+BMwhAF7Bu3Tr17t1b9erVk81m05IlSy55DMMwNGXKFDVp0kR2u13169fXyy+/7PxiUa7at2+viIiIYkvNmjUvuO+uXbvMoHC2ktokmb+AzlazZk0dPXrUXN+xY4cSExNVp04dhyUiIkKSdODAAUnSI488oiZNmqhHjx665pprNHToUCUmJl7UnM8lOztby5cvV3h4uNLS0szllltu0caNG/Xbb79JkmrXrq2uXbtq0aJF5r4LFy6Uh4eH7rrrrkueyxmNGjUqsa65c+eqVatW8vLy0tVXX606depo2bJlOnbsmNln165dCggIkLe3t8O+fz8WaWlpMgxDY8aMKVbXmUt6f6/rfG677TZ17tz5ou4Fulh/f5+cCUOBgYEltp/9/hk4cKD27NmjlJQUSdLvv/+uTZs2OQTTXbt2yc3NrdjPxt/fXzVq1NCuXbsuWKMr36fA2bgH6ALy8vIUEhKioUOHOvwP+lI88cQTWrlypaZMmaKWLVvqyJEjDjcgAhfi7u5eYvvZf60XFRWpW7duGj16dIl9mzRpIkmqW7euUlNTtWLFCv33v//Vf//7X82ZM0eDBw/W3LlzS1Xf4sWLlZ+fr6lTp5b4GTfz5883b36+9957FR0drdTUVIWGhmrRokXq2rWrateufclzOaNq1arF+nzwwQcaMmSI+vbtq2effVZ169aVu7u74uLi9Pvvv1/yHM/coPvMM88oMjKyxD7nCrDnMm7cOHXq1EnvvPOOatSoUWy7zWZzOMZnFBYWljjeud4nF/P+6d27t7y9vbVo0SLdfPPNWrRokdzc3Mz7sv5eV2m58n0KnI0AdAE9evRQjx49zrk9Pz9f//znP/XRRx8pOztbN9xwgyZNmmQ+8fDrr7/q7bff1tatW9W0aVNJ5/5rFdbRsGFDpaWlFWsvqe1iXXvttcrNzTX/kj4fT09P9e7dW71791ZRUZEeeeQRvfPOOxozZowaN258yb/g5s+frxtuuKHYzc2S9M477+jDDz80A1Dfvn318MMPm5fBfvvtN8XGxpZ6Lufy8ccfKzg4WJ9++qnDfP5eY8OGDbVmzRqdOHHC4SzQ34/FmaekqlSpcll1nS08PFydOnXSpEmTNHbs2GLba9as6XCZ84yLOdNyqapVq6ZevXpp8eLFmjZtmhYuXKiOHTuqXr16Zp+GDRuqqKhIO3bscLgpPisrS9nZ2WrYsKHZdq73kDPfp8Dl4BLYZRo1apRSUlK0YMEC/fjjjxowYIC6d++uHTt2SJK+/PJLBQcHa+nSpWrUqJGCgoI0fPhwzgBZXGRkpFJSUpSammq2HTlyxOF+mUt1zz33KCUlRStWrCi2LTs7W6dPn5b01yPfZ3NzczPvWzrzKHO1atXM/S5kz549Wrdune655x7179+/2BIdHa20tDStX79e0l/3dkRGRmrRokVasGCBPD091bdv31LN5XzOnPU4+yzH+vXrzUs8Z0RGRurUqVMOH1RZVFSk+Ph4h35169Y1z9ZkZGQUe72DBw9esKaSnLkX6N133y227dprr9W2bdscxv7hhx/0zTfflOq1LmTgwIHav3+/Zs6cqR9++KHYp3nfcccdklTsKbxp06ZJknr27Gm2VatWrcT3jzPfp8Dl4AzQZdi9e7fmzJmj3bt3m38lPfPMM0pMTNScOXP0yiuv6I8//tCuXbu0ePFizZs3T4WFhXrqqafUv39/rV692sUzgKuMHj1aH3zwgbp166bHHnvMfAy+QYMGOnLkSKkuMTz77LP64osv1KtXL/MR+by8PP3000/6+OOPtXPnTtWuXdsM4F26dNE111yjXbt26a233lJoaKj5V31oaKjc3d01adIkHTt2THa7XV26dFHdunWLve6HH34owzB05513lljXHXfcIQ8PD82fP9+8KXfgwIF64IEH9J///EeRkZHFLv9c7FzOp1evXvr000/Vr18/9ezZU+np6ZoxY4aaN2+u3Nxcs1/fvn3Vvn17Pf3000pLS1OzZs30xRdfmH+knH0s4uPjdeutt6ply5YaMWKEgoODlZWVpZSUFO3du1c//PDDhQ/U34SHhys8PFxr164ttm3o0KGaNm2aIiMjNWzYMB04cEAzZsxQixYtlJOTc8mvdSF33HGHqlevrmeeeUbu7u66++67HbaHhIQoKipK7777rrKzsxUeHq4NGzZo7ty56tu3rzp37mz2bdu2rd5++2299NJLaty4serWrasuXbo49X0KXBbXPYBW+UgyPvvsM3N96dKlhiSjWrVqDouHh4dxzz33GIZhGCNGjDAkGdu3bzf327RpkyHJ2LZtW3lPAU5Q0uPKZwsPD7/gY/CGYRhbtmwxOnbsaNjtduOaa64x4uLijDfffNOQZGRmZjrs27NnzxJf5++PGR8/ftyIjY01GjdubHh6ehq1a9c2br75ZmPKlClGQUGBYRh/Pa5+++23G3Xr1jU8PT2NBg0aGA8//LCRkZHhMNZ7771nBAcHG+7u7ud9JL5ly5ZGgwYNStx2RqdOnYy6deuaj2Ln5OQYVatWNSQZH3zwQYn7XMxczjz+/dprrxXbv6ioyHjllVeMhg0bGna73WjdurWxdOnSYo+QG4ZhHDx40LjvvvuM6tWrG76+vsaQIUOMb775xpBkLFiwwKHv77//bgwePNjw9/c3qlSpYtSvX9/o1auX8fHHH5/3Z2AYjo/Bn23NmjXmRyj8/X31wQcfGMHBwYanp6cRGhpqrFix4pyPwf/953Bm3MWLFzu0n+89fP/99xuSjIiIiBLncOrUKWPChAlGo0aNjCpVqhiBgYFGbGysw0cDGIZhZGZmGj179jSqV69uSHJ4rzrzfQqUls0wSrjDDiWy2Wz67LPPzNP1Cxcu1P3336+ff/652E2GV111lfz9/TVu3Di98sorDh+O9+eff8rb21srV65Ut27dynMKqOCefPJJvfPOO8rNzT3njasoH0uWLFG/fv309ddf65ZbbnF1OQCcjEtgl6F169YqLCzUgQMHHD6j5Wy33HKLTp8+rd9//13XXnutJJmPBJ99wyCs588//3R4eunw4cN6//33deuttxJ+ytnfj0VhYaHeeust+fj4qE2bNi6sDEBZIQBdQG5ursPTIOnp6UpNTVWtWrXUpEkT3X///Ro8eLCmTp2q1q1b6+DBg0pKSlKrVq3Us2dPRUREqE2bNho6dKimT5+uoqIiPfroo+rWrVuxR3lhLWFhYerUqZOuv/56ZWVladasWcrJydGYMWNcXZrlPPbYY/rzzz8VFham/Px8ffrpp/r222/1yiuvlPiIPYArgKuvwVV0Z1+bP3s5cz9HQUGBMXbsWCMoKMioUqWKERAQYPTr18/48ccfzTH27dtn3HXXXcZVV11l+Pn5GUOGDDEOHz7sohmhooiNjTWuu+46o2rVqoa3t7dx6623GqtWrXJ1WZY0f/58o02bNoaPj4/h6elpNG/e3HjrrbdcXRaAMsQ9QAAAwHL4HCAAAGA5BCAAAGA53ARdgqKiIu3fv1/Vq1e/rO+8AQAA5ccwDB0/flz16tWTm9v5z/EQgEqwf//+Yt+eDAAAKoc9e/bommuuOW8fAlAJqlevLumvH6CPj4+LqwEAABcjJydHgYGB5u/x8yEAleDMZS8fHx8CEAAAlczF3L7CTdAAAMByCEAAAMByCEAAAMByCEAAAMByCEAAAMByCEAAAMByCEAAAMByCEAAAMByCEAAAMByCEAAAMByCEAAAMByCEAAAMByCEAAAMByCEAAAMByCEAAAMByPFxdgBUFPb/M1SVc0M5Xe7q6BAAAygxngAAAgOUQgAAAgOUQgAAAgOUQgAAAgOUQgAAAgOUQgAAAgOUQgAAAgOUQgAAAgOUQgAAAgOUQgAAAgOUQgAAAgOUQgAAAgOW4NACtW7dOvXv3Vr169WSz2bRkyZLz9h8yZIhsNluxpUWLFmaf8ePHF9verFmzMp4JAACoTFwagPLy8hQSEqL4+PiL6v/GG28oIyPDXPbs2aNatWppwIABDv1atGjh0O/rr78ui/IBAEAl5eHKF+/Ro4d69Ohx0f19fX3l6+trri9ZskRHjx5VdHS0Qz8PDw/5+/s7rU4AAHBlqdT3AM2aNUsRERFq2LChQ/uOHTtUr149BQcH6/7779fu3bvPO05+fr5ycnIcFgAAcOWqtAFo//79+u9//6vhw4c7tHfo0EEJCQlKTEzU22+/rfT0dHXs2FHHjx8/51hxcXHm2SVfX18FBgaWdfkAAMCFKm0Amjt3rmrUqKG+ffs6tPfo0UMDBgxQq1atFBkZqeXLlys7O1uLFi0651ixsbE6duyYuezZs6eMqwcAAK7k0nuASsswDM2ePVsPPvigPD09z9u3Ro0aatKkidLS0s7Zx263y263O7tMAABQQVXKM0Br165VWlqahg0bdsG+ubm5+v333xUQEFAOlQEAgMrApQEoNzdXqampSk1NlSSlp6crNTXVvGk5NjZWgwcPLrbfrFmz1KFDB91www3Ftj3zzDNau3atdu7cqW+//Vb9+vWTu7u7Bg0aVKZzAQAAlYdLL4Ft3LhRnTt3NtdjYmIkSVFRUUpISFBGRkaxJ7iOHTumTz75RG+88UaJY+7du1eDBg3S4cOHVadOHd1666367rvvVKdOnbKbCAAAqFRshmEYri6iosnJyZGvr6+OHTsmHx8fp48f9Pwyp4/pbDtf7enqEgAAuCSX8vu7Ut4DBAAAcDkIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHIIQAAAwHJcGoDWrVun3r17q169erLZbFqyZMl5+ycnJ8tmsxVbMjMzHfrFx8crKChIXl5e6tChgzZs2FCGswAAAJWNSwNQXl6eQkJCFB8ff0n7bd++XRkZGeZSt25dc9vChQsVExOjcePGafPmzQoJCVFkZKQOHDjg7PIBAEAl5eHKF+/Ro4d69OhxyfvVrVtXNWrUKHHbtGnTNGLECEVHR0uSZsyYoWXLlmn27Nl6/vnnL6dcAABwhaiU9wCFhoYqICBA3bp10zfffGO2FxQUaNOmTYqIiDDb3NzcFBERoZSUlHOOl5+fr5ycHIcFAABcuSpVAAoICNCMGTP0ySef6JNPPlFgYKA6deqkzZs3S5IOHTqkwsJC+fn5Oezn5+dX7D6hs8XFxcnX19dcAgMDy3QeAADAtVx6CexSNW3aVE2bNjXXb775Zv3+++96/fXX9f7775d63NjYWMXExJjrOTk5hCAAAK5glSoAlaR9+/b6+uuvJUm1a9eWu7u7srKyHPpkZWXJ39//nGPY7XbZ7fYyrRMAAFQcleoSWElSU1MVEBAgSfL09FTbtm2VlJRkbi8qKlJSUpLCwsJcVSIAAKhgXHoGKDc3V2lpaeZ6enq6UlNTVatWLTVo0ECxsbHat2+f5s2bJ0maPn26GjVqpBYtWujkyZOaOXOmVq9erZUrV5pjxMTEKCoqSu3atVP79u01ffp05eXlmU+FAQAAuDQAbdy4UZ07dzbXz9yHExUVpYSEBGVkZGj37t3m9oKCAj399NPat2+fvL291apVK3311VcOYwwcOFAHDx7U2LFjlZmZqdDQUCUmJha7MRoAAFiXzTAMw9VFVDQ5OTny9fXVsWPH5OPj4/Txg55f5vQxnW3nqz1dXQIAAJfkUn5/V/p7gAAAAC4VAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFiOh6sLACqKoOeXubqEC9r5ak9XlwAAVwTOAAEAAMshAAEAAMshAAEAAMshAAEAAMshAAEAAMshAAEAAMshAAEAAMshAAEAAMshAAEAAMshAAEAAMshAAEAAMshAAEAAMshAAEAAMshAAEAAMshAAEAAMshAAEAAMvxcHUBAHAhQc8vc3UJF7Tz1Z6uLgHAJeAMEAAAsBwCEAAAsBwCEAAAsBwCEAAAsByXBqB169apd+/eqlevnmw2m5YsWXLe/p9++qm6deumOnXqyMfHR2FhYVqxYoVDn/Hjx8tmszkszZo1K8NZAACAysalASgvL08hISGKj4+/qP7r1q1Tt27dtHz5cm3atEmdO3dW7969tWXLFod+LVq0UEZGhrl8/fXXZVE+AACopFz6GHyPHj3Uo0ePi+4/ffp0h/VXXnlFn3/+ub788ku1bt3abPfw8JC/v7+zygQAAFeYSn0PUFFRkY4fP65atWo5tO/YsUP16tVTcHCw7r//fu3evdtFFQIAgIqoUn8Q4pQpU5Sbm6t77rnHbOvQoYMSEhLUtGlTZWRkaMKECerYsaO2bt2q6tWrlzhOfn6+8vPzzfWcnJwyrx0AALhOpQ1AH374oSZMmKDPP/9cdevWNdvPvqTWqlUrdejQQQ0bNtSiRYs0bNiwEseKi4vThAkTyrxmAABQMVTKS2ALFizQ8OHDtWjRIkVERJy3b40aNdSkSROlpaWds09sbKyOHTtmLnv27HF2yQAAoAKpdAHoo48+UnR0tD766CP17Hnh797Jzc3V77//roCAgHP2sdvt8vHxcVgAAMCVy6WXwHJzcx3OzKSnpys1NVW1atVSgwYNFBsbq3379mnevHmS/rrsFRUVpTfeeEMdOnRQZmamJKlq1ary9fWVJD3zzDPq3bu3GjZsqP3792vcuHFyd3fXoEGDyn+CAACgQnLpGaCNGzeqdevW5iPsMTExat26tcaOHStJysjIcHiC691339Xp06f16KOPKiAgwFyeeOIJs8/evXs1aNAgNW3aVPfcc4+uvvpqfffdd6pTp075Tg4AAFRYLj0D1KlTJxmGcc7tCQkJDuvJyckXHHPBggWXWRUAALjSVbp7gAAAAC4XAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFgOAQgAAFiOUwJQYWGhUlNTdfToUWcMBwAAUKZKFYCefPJJzZo1S9Jf4Sc8PFxt2rRRYGCgkpOTnVkfAACA05UqAH388ccKCQmRJH355ZdKT0/Xtm3b9NRTT+mf//ynUwsEAABwtlIFoEOHDsnf31+StHz5cg0YMEBNmjTR0KFD9dNPPzm1QAAAAGcrVQDy8/PTL7/8osLCQiUmJqpbt26SpBMnTsjd3d2pBQIAADibR2l2io6O1j333KOAgADZbDZFRERIktavX69mzZo5tUAAAABnK1UAGj9+vG644Qbt2bNHAwYMkN1ulyS5u7vr+eefd2qBAAAAzlaqACRJ/fv3lySdPHnSbIuKirr8igAAAMpYqe4BKiws1MSJE1W/fn1dddVV+uOPPyRJY8aMMR+PBwAAqKhKFYBefvllJSQkaPLkyfL09DTbb7jhBs2cOdNpxQEAAJSFUgWgefPm6d1339X999/v8NRXSEiItm3b5rTiAAAAykKpAtC+ffvUuHHjYu1FRUU6derUZRcFAABQlkoVgJo3b67/+7//K9b+8ccfq3Xr1pddFAAAQFkq1VNgY8eOVVRUlPbt26eioiJ9+umn2r59u+bNm6elS5c6u0YAAACnKtUZoD59+ujLL7/UV199pWrVqmns2LH69ddf9eWXX5qfCg0AAFBRlfpzgDp27KhVq1Y5sxYAAIByUaozQMHBwTp8+HCx9uzsbAUHB192UQAAAGWpVAFo586dKiwsLNaen5+vffv2XXZRAAAAZemSLoF98cUX5r+vWLFCvr6+5nphYaGSkpIUFBTktOIAlE7Q88tcXcIF7Xy1p6tLAGBhlxSA+vbtK0my2WzFvverSpUqCgoK0tSpU51WHAAAQFm4pEtgRUVFKioqUoMGDXTgwAFzvaioSPn5+dq+fbt69ep10eOtW7dOvXv3Vr169WSz2bRkyZIL7pOcnKw2bdrIbrercePGSkhIKNYnPj5eQUFB8vLyUocOHbRhw4ZLmCUAALjSleoeoPT0dNWuXfuyXzwvL08hISGKj4+/6Nft2bOnOnfurNTUVD355JMaPny4VqxYYfZZuHChYmJiNG7cOG3evFkhISGKjIzUgQMHLrteAABwZShVAJKktWvXqnfv3mrcuLEaN26sO++8s8RPhz6fHj166KWXXlK/fv0uqv+MGTPUqFEjTZ06Vddff71GjRql/v376/XXXzf7TJs2TSNGjFB0dLSaN2+uGTNmyNvbW7Nnz76k2gAAwJWrVAHogw8+UEREhLy9vfX444/r8ccfV9WqVdW1a1d9+OGHzq7RlJKSooiICIe2yMhIpaSkSJIKCgq0adMmhz5ubm6KiIgw+wAAAJTqgxBffvllTZ48WU899ZTZ9vjjj2vatGmaOHGi7rvvPqcVeLbMzEz5+fk5tPn5+SknJ0d//vmnjh49qsLCwhL7nO9b6vPz85Wfn2+u5+TkOLdwAABQoZTqDNAff/yh3r17F2u/8847lZ6eftlFlbe4uDj5+vqaS2BgoKtLAgAAZahUASgwMFBJSUnF2r/66qsyDQ/+/v7KyspyaMvKypKPj4+qVq2q2rVry93dvcQ+/v7+5xw3NjZWx44dM5c9e/aUSf0AAKBiKNUlsKefflqPP/64UlNTdfPNN0uSvvnmGyUkJOiNN95waoFnCwsL0/Llyx3aVq1apbCwMEmSp6en2rZtq6SkJPMzi4qKipSUlKRRo0adc1y73S673V5mdQMAgIqlVAFo5MiR8vf319SpU7Vo0SJJ0vXXX6+FCxeqT58+Fz1Obm6u0tLSzPX09HSlpqaqVq1aatCggWJjY7Vv3z7NmzdPkvSPf/xD//73vzV69GgNHTpUq1ev1qJFi7Rs2f8+9TYmJkZRUVFq166d2rdvr+nTpysvL0/R0dGlmSoAALgClfrb4Pv163fRj6+fy8aNG9W5c2dzPSYmRpIUFRWlhIQEZWRkaPfu3eb2Ro0aadmyZXrqqaf0xhtv6JprrtHMmTMVGRlp9hk4cKAOHjyosWPHKjMzU6GhoUpMTCx2YzQAALCuUgWg4cOH64EHHlCnTp0u68U7deokwzDOub2kT3nu1KmTtmzZct5xR40add5LXgAAwNpKdRP0wYMH1b17dwUGBurZZ59Vamqqk8sCAAAoO6UKQJ9//rkyMjI0ZswYff/992rbtq1atGihV155RTt37nRyiQAAAM5V6q/CqFmzph566CElJydr165dGjJkiN5//301btzYmfUBAAA4XakD0BmnTp3Sxo0btX79eu3cuZObjQEAQIVX6gC0Zs0ajRgxQn5+fhoyZIh8fHy0dOlS7d2715n1AQAAOF2pngKrX7++jhw5ou7du+vdd99V7969+SBBAABQaZQqAI0fP14DBgxQjRo1nFwOAABA2StVABoxYoSz6wAAACg3pQpAJ0+e1FtvvaU1a9bowIEDKioqcti+efNmpxQHAABQFkoVgIYNG6aVK1eqf//+at++vWw2m7PrAgAAKDOlCkBLly7V8uXLdcsttzi7HgAAgDJXqsfg69evr+rVqzu7FgAAgHJRqgA0depUPffcc9q1a5ez6wEAAChzpboE1q5dO508eVLBwcHy9vZWlSpVHLYfOXLEKcUBAACUhVIFoEGDBmnfvn165ZVX5Ofnx03QAACgUilVAPr222+VkpKikJAQZ9cDAABQ5kp1D1CzZs30559/OrsWAACAclGqAPTqq6/q6aefVnJysg4fPqycnByHBQAAoCIr1SWw7t27S5K6du3q0G4Yhmw2mwoLCy+/MgAAgDJSqgC0Zs0aZ9cBAABQbkoVgMLDw51dBwAAQLkpVQBat27debffdtttpSoGAACgPJQqAHXq1KlY29mfBcQ9QAAAoCIr1VNgR48edVgOHDigxMRE3XjjjVq5cqWzawQAAHCqUp0B8vX1LdbWrVs3eXp6KiYmRps2bbrswgAAAMpKqc4AnYufn5+2b9/uzCEBAACcrlRngH788UeHdcMwlJGRoVdffVWhoaHOqAsAAKDMlCoAhYaGymazyTAMh/abbrpJs2fPdkphAAAAZaVUASg9Pd1h3c3NTXXq1JGXl5dTigIAVHxBzy9zdQkXtPPVnq4uARVUqQJQw4YNlZSUpKSkJB04cEBFRUUO2zkLBAAAKrJSBaAJEyboxRdfVLt27RQQEODwGUAAAAAVXakC0IwZM5SQkKAHH3zQ2fUAAACUuVI9Bl9QUKCbb77Z2bUAAACUi1IFoOHDh+vDDz90di0AAADlolSXwE6ePKl3331XX331lVq1aqUqVao4bJ82bZpTigMAACgLpf4gxDMfeLh161aHbdwQDQDnxqPjQMVQqgC0Zs0aZ9cBAABQbpz6XWClFR8fr6CgIHl5ealDhw7asGHDOft26tRJNput2NKz5//+YhkyZEix7d27dy+PqQAAgEqgVGeAnGnhwoWKiYnRjBkz1KFDB02fPl2RkZHavn276tatW6z/p59+qoKCAnP98OHDCgkJ0YABAxz6de/eXXPmzDHX7XZ72U0CAABUKi4/AzRt2jSNGDFC0dHRat68uWbMmCFvb+9zfpp0rVq15O/vby6rVq2St7d3sQBkt9sd+tWsWbM8pgMAACoBlwaggoICbdq0SREREWabm5ubIiIilJKSclFjzJo1S/fee6+qVavm0J6cnKy6deuqadOmGjlypA4fPnzOMfLz85WTk+OwAACAK5dLA9ChQ4dUWFgoPz8/h3Y/Pz9lZmZecP8NGzZo69atGj58uEN79+7dNW/ePCUlJWnSpElau3atevToocLCwhLHiYuLk6+vr7kEBgaWflIAAKDCc/k9QJdj1qxZatmypdq3b+/Qfu+995r/3rJlS7Vq1UrXXnutkpOT1bVr12LjxMbGKiYmxlzPyckhBAEAcAVz6Rmg2rVry93dXVlZWQ7tWVlZ8vf3P+++eXl5WrBggYYNG3bB1wkODlbt2rWVlpZW4na73S4fHx+HBQAAXLlcGoA8PT3Vtm1bJSUlmW1FRUVKSkpSWFjYefddvHix8vPz9cADD1zwdfbu3avDhw8rICDgsmsGAACVn8ufAouJidF7772nuXPn6tdff9XIkSOVl5en6OhoSdLgwYMVGxtbbL9Zs2apb9++uvrqqx3ac3Nz9eyzz+q7777Tzp07lZSUpD59+qhx48aKjIwslzkBAICKzeX3AA0cOFAHDx7U2LFjlZmZqdDQUCUmJpo3Ru/evVtubo45bfv27fr666+1cuXKYuO5u7vrxx9/1Ny5c5Wdna169erp9ttv18SJE/ksIAAAIKkCBCBJGjVqlEaNGlXituTk5GJtTZs2lWEYJfavWrWqVqxY4czyAADAFcbll8AAAADKGwEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYToV4DB6VV9Dzy1xdwgXtfLWnq0sAAFQwnAECAACWwxkgAACuIJyZvzicAQIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZDAAIAAJZTIQJQfHy8goKC5OXlpQ4dOmjDhg3n7JuQkCCbzeaweHl5OfQxDENjx45VQECAqlatqoiICO3YsaOspwEAACoJlweghQsXKiYmRuPGjdPmzZsVEhKiyMhIHThw4Jz7+Pj4KCMjw1x27drlsH3y5Ml68803NWPGDK1fv17VqlVTZGSkTp48WdbTAQAAlYDLA9C0adM0YsQIRUdHq3nz5poxY4a8vb01e/bsc+5js9nk7+9vLn5+fuY2wzA0ffp0/etf/1KfPn3UqlUrzZs3T/v379eSJUvKYUYAAKCic2kAKigo0KZNmxQREWG2ubm5KSIiQikpKefcLzc3Vw0bNlRgYKD69Omjn3/+2dyWnp6uzMxMhzF9fX3VoUOHc46Zn5+vnJwchwUAAFy5XBqADh06pMLCQoczOJLk5+enzMzMEvdp2rSpZs+erc8//1wffPCBioqKdPPNN2vv3r2SZO53KWPGxcXJ19fXXAIDAy93agAAoAJz+SWwSxUWFqbBgwcrNDRU4eHh+vTTT1WnTh298847pR4zNjZWx44dM5c9e/Y4sWIAAFDRuDQA1a5dW+7u7srKynJoz8rKkr+//0WNUaVKFbVu3VppaWmSZO53KWPa7Xb5+Pg4LAAA4Mrl4coX9/T0VNu2bZWUlKS+fftKkoqKipSUlKRRo0Zd1BiFhYX66aefdMcdd0iSGjVqJH9/fyUlJSk0NFSSlJOTo/Xr12vkyJFlMQ0AQCUX9PwyV5dwQTtf7enqEq4oLg1AkhQTE6OoqCi1a9dO7du31/Tp05WXl6fo6GhJ0uDBg1W/fn3FxcVJkl588UXddNNNaty4sbKzs/Xaa69p165dGj58uKS/nhB78skn9dJLL+m6665To0aNNGbMGNWrV88MWQAAwNpcHoAGDhyogwcPauzYscrMzFRoaKgSExPNm5h3794tN7f/Xak7evSoRowYoczMTNWsWVNt27bVt99+q+bNm5t9Ro8erby8PD300EPKzs7WrbfeqsTExGIfmAgAAKzJ5QFIkkaNGnXOS17JyckO66+//rpef/31845ns9n04osv6sUXX3RWiQAA4ApS6Z4CAwAAuFwEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkEIAAAYDkVIgDFx8crKChIXl5e6tChgzZs2HDOvu+99546duyomjVrqmbNmoqIiCjWf8iQIbLZbA5L9+7dy3oaAACgknB5AFq4cKFiYmI0btw4bd68WSEhIYqMjNSBAwdK7J+cnKxBgwZpzZo1SklJUWBgoG6//Xbt27fPoV/37t2VkZFhLh999FF5TAcAAFQCLg9A06ZN04gRIxQdHa3mzZtrxowZ8vb21uzZs0vsP3/+fD3yyCMKDQ1Vs2bNNHPmTBUVFSkpKcmhn91ul7+/v7nUrFmzPKYDAAAqAZcGoIKCAm3atEkRERFmm5ubmyIiIpSSknJRY5w4cUKnTp1SrVq1HNqTk5NVt25dNW3aVCNHjtThw4fPOUZ+fr5ycnIcFgAAcOVyaQA6dOiQCgsL5efn59Du5+enzMzMixrjueeeU7169RxCVPfu3TVv3jwlJSVp0qRJWrt2rXr06KHCwsISx4iLi5Ovr6+5BAYGln5SAACgwvNwdQGX49VXX9WCBQuUnJwsLy8vs/3ee+81/71ly5Zq1aqVrr32WiUnJ6tr167FxomNjVVMTIy5npOTQwgCAOAK5tIzQLVr15a7u7uysrIc2rOysuTv73/efadMmaJXX31VK1euVKtWrc7bNzg4WLVr11ZaWlqJ2+12u3x8fBwWAABw5XJpAPL09FTbtm0dbmA+c0NzWFjYOfebPHmyJk6cqMTERLVr1+6Cr7N3714dPnxYAQEBTqkbAABUbi5/CiwmJkbvvfee5s6dq19//VUjR45UXl6eoqOjJUmDBw9WbGys2X/SpEkaM2aMZs+eraCgIGVmZiozM1O5ubmSpNzcXD377LP67rvvtHPnTiUlJalPnz5q3LixIiMjXTJHAABQsbj8HqCBAwfq4MGDGjt2rDIzMxUaGqrExETzxujdu3fLze1/Oe3tt99WQUGB+vfv7zDOuHHjNH78eLm7u+vHH3/U3LlzlZ2drXr16un222/XxIkTZbfby3VuAACgYnJ5AJKkUaNGadSoUSVuS05OdljfuXPneceqWrWqVqxY4aTKAADAlcjll8AAAADKGwEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYDgEIAABYToUIQPHx8QoKCpKXl5c6dOigDRs2nLf/4sWL1axZM3l5eally5Zavny5w3bDMDR27FgFBASoatWqioiI0I4dO8pyCgAAoBJxeQBauHChYmJiNG7cOG3evFkhISGKjIzUgQMHSuz/7bffatCgQRo2bJi2bNmivn37qm/fvtq6davZZ/LkyXrzzTc1Y8YMrV+/XtWqVVNkZKROnjxZXtMCAAAVmMsD0LRp0zRixAhFR0erefPmmjFjhry9vTV79uwS+7/xxhvq3r27nn32WV1//fWaOHGi2rRpo3//+9+S/jr7M336dP3rX/9Snz591KpVK82bN0/79+/XkiVLynFmAACgonJpACooKNCmTZsU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O++8o4SEBL388stmfzc3N7355pv6+eefNXfuXK1evVqjR492eJ0TJ05o0qRJmjlzpn7++WfVrVu33OYIoOzwZagAKq1HHnlEO3fu1PLlyyX9dUYnPj5eaWlp6tatm7p27arY2Fiz/wcffKDRo0dr//79JY738ccf6x//+IcOHTok6a8zQNHR0UpNTVVISEjZTwhAuSEAAai0tmzZohtvvFG7du1S/fr11apVKw0YMEBjxoxRnTp1lJubK3d3d7N/YWGhTp48qby8PHl7e+urr75SXFyctm3bppycHJ0+fdphe0JCgh5++GGdPHlSNpvNhTMF4Gweri4AAEqrdevWCgkJ0bx583T77bfr559/1rJlyyRJubm5mjBhgu66665i+3l5eWnnzp3q1auXRo4cqZdfflm1atXS119/rWHDhqmgoEDe3t6SpKpVqxJ+gCsQAQhApTZ8+HBNnz5d+/btU0REhAIDAyVJbdq00fbt29W4ceMS99u0aZOKioo0depUubn9dTvkokWLyq1uAK5FAAJQqd1333165pln9N5772nevHlm+9ixY9WrVy81aNBA/fv3l5ubm3744Qdt3bpVL730kho3bqxTp07prbfeUu/evfXNN99oxowZLpwJgPLEU2AAKjVfX1/dfffduuqqq9S3b1+zPTIyUkuXLtXKlSt144036qabbtLrr7+uhg0bSpJCQkI0bdo0TZo0STfccIPmz5+vuLg4F80CQHnjJmgAlV7Xrl3VokULvfnmm64uBUAlQQACUGkdPXpUycnJ6t+/v3755Rc1bdrU1SUBqCS4BwhApdW6dWsdPXpUkyZNIvwAuCScAQIAAJbDTdAAAMByCEAAAMByCEAAAMByCEAAAMByCEAAAMByCEAAAMByCEAAAMByCEAAAMByCEAAAMBy/h9nyvtmeN6w6wAAAABJRU5ErkJggg==",
+      "text/plain": [
+       "<Figure size 640x480 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "plt.bar('year', 'numvotes', data=MERGED_DATA)\n",
+    "plt.xlabel('year')\n",
+    "plt.ylabel('numvotes')\n",
+    "plt.title('Highest Average Numvotes')\n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "1ca991c4-1274-493d-9a61-b7d7840d6fa6",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.1"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
